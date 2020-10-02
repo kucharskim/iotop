@@ -197,7 +197,8 @@ def parse_proc_pid_status(pid):
     result_dict = {}
     try:
         sep = ':\t'
-        for line in open('/proc/%d/status' % pid):
+        for line in open('/proc/%d/status' % pid, encoding='ascii',
+                         errors='backslashreplace'):
             if sep in line:
                 key, value = line.split(sep, 1)
                 result_dict[key] = value.strip()
